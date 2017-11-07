@@ -1,0 +1,19 @@
+{
+  "name": "vue-j-store",
+  "version": "1.0.0",
+  "description": "模块化vue状态管理，解决store文件过大，命名空间过长等问题。",
+  "main": "vue-j-store.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/anderpang/vue-j-store.git"
+  },
+  "author": "AnderPang <anderpang@foxmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/anderpang/vue-j-store/issues"
+  },
+  "homepage": "https://github.com/anderpang/vue-j-store#readme"
+}
