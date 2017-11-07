@@ -14,7 +14,7 @@ $ npm install vue-j-store
 
 ## 优点对照
 
-![vue-j-store](https://github.com/anderpang/vue-j-store/blob/master/images/vue-j-store.jpg)
+![vue-j-store](https://raw.githubusercontent.com/anderpang/vue-j-store/master/images/vue-j-store.jpg)
 
 相信用过的人都想过store过大，actions过多而头痛吧。换个角度不好吗？一对一，删除方便，查找方便，读取变量也方便。
 
