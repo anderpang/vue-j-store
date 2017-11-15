@@ -79,6 +79,91 @@ VueStore.prototype={
     },
     _watch:function(k){
        return this._vm[k](this.state,this.getters);
+    },
+    _mapSerialize(map){
+        var r,tf=typeof map;
+        switch(tf){
+            case "object":
+                if(Array.isArray(map)){
+                    r={};
+                    map.forEach(function(m){
+                        r[m]=m;
+                    });         
+                    return r;
+                }
+                return map;
+            case "string":
+                r={};
+                r[map]=map;
+               return r;
+            default:
+              return null;
+        }
+    },
+    _toMap:function(map){
+       var r={},keys=Object.keys(map),i=keys.length,key;
+       while(i--){
+           key=keys[i];
+           r[key]=key;
+       }
+       return r;
+    },
+    mapState:function(states){
+       var r={},k,f=function(v){           
+           return function(){
+              var store=this.$store;
+              return typeof v==="function"?v.call(this,store.state,store.getters):store.state[v];
+           };
+       };
+       states=this._mapSerialize(states)||this.state;
+       for(k in states){
+          r[k]=f(states[k]);
+       }
+       return r;
+    },
+    mapGetters:function(getters){
+       var r={},k,f=function(v){
+           return function(){
+               return this.getters[v];
+           }
+       };
+       getters=this._mapSerialize(getters)||this.getters;
+       for(k in getters){
+          r[k]=f(getters[k]);
+       }
+       return r;
+    },
+    mapMutations:function(mutations){
+       var r={},k,f=function(v){
+           return function(){
+               var store=this.$store,
+                   commit=store.commit,
+                   args=[].slice.call(arguments);
+               return typeof v==="function"?v.apply(this,[commit].concat(args)):commit.apply(store, [v].concat(args));
+           }
+       };
+       mutations=this._mapSerialize(mutations)||this._toMap(this.mutations);
+       for(k in mutations){
+          r[k]=f(mutations[k]);
+       }
+       return r;       
+    },
+    mapActions:function(actions){
+       var r={},k,f=function(v){
+           return function(){
+               var store=this.$store,
+                   dispatch=store.dispatch,
+                   args=[].slice.call(arguments);
+
+               return typeof v==="function"?v.apply(this,[dispatch].concat(args)):dispatch.apply(store, [v].concat(args));
+           }
+       };
+       actions=this._mapSerialize(actions)||this._toMap(this.actions);
+
+       for(k in actions){
+          r[k]=f(actions[k]);
+       }
+       return r;       
     }
 };
 
