@@ -1,6 +1,6 @@
 {
   "name": "vue-j-store",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "模块化vue状态管理，解决store文件过大，命名空间过长等问题。",
   "main": "vue-j-store.js",
   "scripts": {
