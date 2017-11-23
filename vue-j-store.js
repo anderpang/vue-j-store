@@ -80,7 +80,7 @@ VueStore.prototype={
     _watch:function(k){
        return this._vm[k](this.state,this.getters);
     },
-    _mapSerialize(map){
+    _mapSerialize:function(map){
         var r,tf=typeof map;
         switch(tf){
             case "object":
